@@ -44,7 +44,7 @@ JSBSim is used in a range of projects among which:
 * SITL (Software In The Loop) Drone Autopilot testing : [ArduPilot](https://ardupilot.org/dev/docs/sitl-with-jsbsim.html), [PX4 Autopilot](https://docs.px4.io/main/en/sim_jsbsim/), [Paparazzi](https://wiki.paparazziuav.org/wiki/Simulation)
 * Machine Learning Aircraft control: [gym-jsbsim](https://github.com/Gor-Ren/gym-jsbsim)
 * [DARPA Virtual Air Combat Competition](https://www.darpa.mil/news/2019/virtual-air-combat-competition) where one of the AI went undefeated in five rounds of mock air combat against an Air Force fighter (see the [video on YouTube](https://www.youtube.com/watch?v=IOJhgC1ksNU)).
-* [Project AirSim](https://github.com/iamaisim/ProjectAirSim) is an open-source simulation platform for autonomous systems [recognized by Microsoft](https://github.com/microsoft/AirSim/blob/main/project_airsim.md) as the evolution of the original [AirSim](https://github.com/microsoft/AirSim). The current simulation environment provides a modular framework for drones, fixed-wing aircraft, robots, and other autonomous systems. Project AirSim features JSBSim integration for fixed-wing aircraft dynamics, [with public Cessna 310 and Skywalker X8 examples](https://github.com/iamaisim/ProjectAirSim/blob/main/docs/physics/jsbsim.md).
+* [Project AirSim](https://github.com/iamaisim/ProjectAirSim) is an open-source simulation platform for autonomous systems [recognized by Microsoft](https://github.com/microsoft/AirSim/blob/main/project_airsim.md) as the evolution of the original [AirSim](https://github.com/microsoft/AirSim). The current simulation environment provides a modular framework for drones, fixed-wing aircraft, robots, and other autonomous systems. Project AirSim integrates JSBSim for fixed-wing and multirotor dynamics, with public examples for [Cessna 310, Skywalker X8, Rascal 110, and an X-configuration quadrotor](https://github.com/iamaisim/ProjectAirSim/blob/main/docs/physics/jsbsim.md). The Rascal 110 and quadrotor JSBSim examples use PX4. [Project AirSim Runtime](https://github.com/iamaisim/ProjectAirSim/blob/main/samples/projectairsim_runtime/README.md) runs JSBSim without Unreal Engine, using Project AirSim’s scene configuration, non-rendered sensors, and controller integrations.
 * [PteroSim](https://github.com/PteroLabsAI/PteroSim-UAV-Simulator) is an Unreal Engine 5 UAV simulator that runs every vehicle (multirotors, helicopters, VTOLs, tailsitters, fixed-wing) on JSBSim, with PX4 or ArduPilot SITL in the loop and a Python API. Both autopilot projects document it ([PX4](https://docs.px4.io/main/en/sim_pterosim/), [ArduPilot](https://ardupilot.org/dev/docs/sitl-with-pterosim.html)). Epic Games covered it in an [Unreal Engine spotlight](https://www.unrealengine.com/spotlights/ue5-is-becoming-the-platform-of-choice-for-robotics-simulation). The [vehicle models](https://github.com/PteroLabsAI/PteroSimAircrafts) are plain JSBSim aircraft definitions.
 
 ## Academic and Industry Research
@@ -55,13 +55,47 @@ In 2023 JSBSim was featured in the article ["A deep reinforcement learning contr
 
 Another more advanced application within the field of Deep Reinforcement Learning is presented in the article ["Hierarchical Reinforcement Learning for Air Combat at DARPA's AlphaDogfight Trials"](https://ieeexplore.ieee.org/document/9950612) by A. P. Pope et al. (2023), _IEEE Transactions on Artificial Intelligence_ (doi: 10.1109/TAI.2022.3222143), featuring a hierarchical reinforcement learning approach. The trained agent was designed alongside of and competed against active fighter pilots, and ultimately defeated a graduate of the United States Air Force's F-16 Weapons Instructor Course in match play. See also the [DARPA Virtual Air Combat Competition](https://www.darpa.mil/news/2019/virtual-air-combat-competition).
 
+# Citation
+
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.11129/status.svg)](https://doi.org/10.21105/joss.11129)
+
+If you use JSBSim in research, please cite [the paper by Berndt et al., (2026), titled ``JSBSim, An Open Source Flight Dynamics Software Library.'' published on the Journal of Open Source Software](https://joss.theoj.org/papers/10.21105/joss.11129), as follows:
+
+```BibTeX
+@article{Berndt:Coconnier:DeMarco:McLeod:2026,
+  author = {Berndt, Jon S. and Coconnier, Bertrand and {De~Marco}, Agostino and McLeod, Sean},
+  title = {JSBSim, An Open Source Flight Dynamics Software Library},
+  journal = {Journal of Open Source Software},
+  publisher = {The Open Journal},
+  year = {2026},
+  volume = {11},
+  number = {126},
+  pages = {11129},
+  doi = {10.21105/joss.11129},
+  url = {https://doi.org/10.21105/joss.11129},
+}
+```
+
+In addition, if you also want to reference this repository, please cite:
+
+```BibTeX
+@software{Berndt:Coconnier:DeMarco:McLeod:Zenodo:2026,
+  author = {Berndt, Jon S. and Coconnier, Bertrand and {De~Marco}, Agostino and McLeod, Sean},
+  title = {JSBSim - An Open Source Flight Dynamics Software Library},
+  year = 2026,
+  publisher = {Zenodo},
+  doi = {10.5281/zenodo.20258621},
+  url = {https://doi.org/10.5281/zenodo.20258621},
+}
+```
+
 # User Guide
 
 ## Installation
 
 ### Windows
 
-A Windows installer `JSBSim-1.3.1-setup.exe` is available in the [release section](https://github.com/JSBSim-Team/jsbsim/releases/tag/v1.3.1). It installs the 2 executables along with aircraft data and some example scripts:
+A Windows installer `JSBSim-1.3.3-setup.exe` is available in the [release section](https://github.com/JSBSim-Team/jsbsim/releases/tag/v1.3.3). It installs the 2 executables along with aircraft data and some example scripts:
 
 * `JSBSim.exe` which runs FDM simulations.
 * `aeromatic.exe` which builds aircraft definitions from Question/Answer interface
@@ -72,15 +106,15 @@ The Windows installer also contains the files needed to build the JSBSim Matlab 
 
 ### Ubuntu Linux
 
-Debian packages for Ubuntu Linux "Jammy" 22.04 LTS and "Noble" 24.04 LTS for 64 bits platforms are also available in the [JSBSim project release section](https://github.com/JSBSim-Team/jsbsim/releases/tag/v1.3.1). There are 3 packages for each platform:
+Debian packages for Ubuntu Linux "Jammy" 22.04 LTS and "Noble" 24.04 LTS for 64 bits platforms are also available in the [JSBSim project release section](https://github.com/JSBSim-Team/jsbsim/releases/tag/v1.3.3). There are 3 packages for each platform:
 
-* `JSBSim_1.3.1-1837.amd64.deb` which installs the executables `JSBSim` and `aeromatic`
-* `JSBSim-devel_1.3.1-1837.amd64.deb` which installs the development resources (headers and libraries)
-* `python3-JSBSim_1.3.1-1837.amd64.deb` which installs the Python module of JSBSim
+* `JSBSim_1.3.3-2002.amd64.deb` which installs the executables `JSBSim` and `aeromatic`
+* `JSBSim-devel_1.3.3-2002.amd64.deb` which installs the development resources (headers and libraries)
+* `python3-JSBSim_1.3.3-2002.amd64.deb` which installs the Python module of JSBSim
 
 ### Python module
 
-JSBSim provides binary wheel packages for its Python module on Windows, Mac OSX and Linux platforms for several Python versions (3.10, 3.11, 3.12, 3.13 and 3.14). These can be installed using either `pip` or `conda`.
+JSBSim provides binary wheel packages for its Python module on Windows, Mac OSX and Linux platforms for several Python versions (3.10, 3.11, 3.12, 3.13, 3.14 and 3.15). These can be installed using either `pip` or `conda`.
 
 #### Installation with `pip`
 
@@ -124,7 +158,7 @@ At the moment, JSBSim does not provide binaries for platforms other than Windows
 
 ### Aircraft data and example scripts
 
-JSBSim aircraft data and example scripts are automatically installed if you are using [Python wheel packages](https://github.com/bcoconni/jsbsim#python-module). Otherwise, you can get aircraft data and example scripts by downloading either the [zip package](https://github.com/JSBSim-Team/jsbsim/archive/v1.3.1.zip) or the [tar.gz package](https://github.com/JSBSim-Team/jsbsim/archive/v1.3.1.tar.gz).
+JSBSim aircraft data and example scripts are automatically installed if you are using [Python wheel packages](https://github.com/bcoconni/jsbsim#python-module). Otherwise, you can get aircraft data and example scripts by downloading either the [zip package](https://github.com/JSBSim-Team/jsbsim/archive/v1.3.3.zip) or the [tar.gz package](https://github.com/JSBSim-Team/jsbsim/archive/v1.3.3.tar.gz).
 
 ## Quick start
 
@@ -194,7 +228,7 @@ The default aircraft data is located in a directory which path can be retrieved 
 print(jsbsim.get_default_root_dir())
 ```
 
-A more elaborate example of Python code is [JSBSim.py](https://github.com/JSBSim-Team/jsbsim/blob/master/python/JSBSim.py), the Python equivalent to `JSBSim.exe`.
+The Python API is described in more details in the [Python API documentation](https://jsbsim-team.github.io/jsbsim/python/) and a more elaborate example of Python code is [JSBSim.py](https://github.com/JSBSim-Team/jsbsim/blob/master/python/JSBSim.py), the Python equivalent to `JSBSim.exe`.
 
 ## Python module examples
 
@@ -228,7 +262,7 @@ We are also on Facebook: <https://www.facebook.com/jsbsim/>
 
 # Legal Notice
 
-<p><a href="https://opensource.org/licenses/LGPL-2.1">
+<p align="center"><a href="https://opensource.org/licenses/LGPL-2.1">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://opensource.org/wp-content/themes/osi/assets/img/osi-badge-light.svg">
     <source media="(prefers-color-scheme: light)" srcset="https://opensource.org/wp-content/uploads/2022/10/osi-badge-dark.svg">
